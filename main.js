@@ -18,7 +18,7 @@ function take_snapshot(){
 
 console.log('ml5 version:', ml5.version);
 
-classifier = ml5.imageClassifier('https://teachablemachine.withgoogle.com/models/sYoFUInzc/model.json', modelLoaded);
+classifier = ml5.imageClassifier('https://teachablemachine.withgoogle.com/models/1tmM2wT05/model.json', modelLoaded);
 
 function modelLoaded(){
     console.log('Model Loaded!');
@@ -27,8 +27,7 @@ function modelLoaded(){
 function speak(){
     var synth = window.speechSynthesis;
     speak_data_1 = "The first prediction is " + prediction_1;
-    speak_data_2 = "And the second prediction is " + prediction_2;
-    var utterThis = new SpeechSynthesisUtterance(speak_data_1 + speak_data_2)
+    var utterThis = new SpeechSynthesisUtterance(speak_data_1)
     synth.speak(utterThis);
 }
 
@@ -43,29 +42,24 @@ function gotResult(error, results){
     } else {
         console.log(results);
         document.getElementById("result_emotion_name").innerHTML = results[0].label;
-        document.getElementById("result_emotion_name2").innerHTML = results[1].label;
         prediction_1 = results[0].label;
-        prediction_2 = results[1].label;
         speak();
 
-        if(results[0].label == "Happy"){
-            document.getElementById("update_emoji").innerHTML = "&#128522;";
+        if(results[0].label == "Thumbs Up"){
+            document.getElementById("update_emoji").src = "https://images.emojiterra.com/google/android-10/512px/1f44d.png";
         }
-        if(results[0].label == "Sad"){
-            document.getElementById("update_emoji").innerHTML = "&#128532;";
+        if(results[0].label == "Victory"){
+            document.getElementById("update_emoji").src = "https://c.tenor.com/d-mxCfVUGyMAAAAM/hand-emoji-victory.gif";
         }
-        if(results[0].label == "Angry"){
-            document.getElementById("update_emoji").innerHTML = "&#128548;";
+        if(results[0].label == "Nice"){
+            document.getElementById("update_emoji").src = "https://cdn-icons-png.flaticon.com/512/2165/2165851.png";
         }
-        if(results[1].label == "Happy"){
-            document.getElementById("update_emoji2").innerHTML = "&#128522;"
+        if(results[0].label == "Pointing"){
+            document.getElementById("update_emoji2").src = "https://media0.giphy.com/media/eIarelIdwLsn7Yzk89/giphy.gif?cid=6c09b9528d2ewapjxqp3ke4xolhu4jy89i951v0biu2fvb6p&rid=giphy.gif&ct=s"
         }
-        if(results[1].label == "Sad"){
-            document.getElementById("update_emoji2").innerHTML = "&#128532;"
-        }
-        if(results[1].label == "Angry"){
-            document.getElementById("update_emoji2").innerHTML = "&#128548;";
-        }   
+        if(results[0].label == "Clap"){
+            document.getElementById("update_emoji2").src = "https://c.tenor.com/yICKyE-jYPkAAAAC/wow-clap.gif"
+        }  
 
     }
 }
